@@ -6,6 +6,9 @@ const colors= require('colors')
 const dotenv= require('dotenv')
 const connectDB = require('./config/db')
 
+// routes path
+const authRoutes= require('./routes/authRoutes')
+
 // dotenv
 dotenv.config()
 
