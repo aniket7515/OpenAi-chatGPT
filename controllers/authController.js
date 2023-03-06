@@ -12,7 +12,7 @@ exports.sendToken=(user,statusCode,res)=>{
 
 // REGISTER
 
-exports.registerController= async(req,res,next)=>{
+exports.registerController= async(req,res)=>{
     try {
         const {username, email , password}= req.body
         // existing user
@@ -29,7 +29,7 @@ exports.registerController= async(req,res,next)=>{
 }
 
 // LOGIN
-exports.loginController=async()=>{
+exports.loginController=async(req,res,next)=>{
     try {
         const {email, password}= req.body
         if(!email || !password){
@@ -39,9 +39,9 @@ exports.loginController=async()=>{
         if(!user){
             return next(new errorResponse('Invalid Credential',401))
         }
-        const isMatch= await userModel.matchPassword(password)
+        const isMatch= await user.matchPassword(password)
         if(!isMatch){
-            return next(new errorHandler('Invalid Credential',401))
+            return next(new errorResponse('Invalid Credential',401))
         }
         this.sendToken(user, 200, res)
     } catch (error) {
