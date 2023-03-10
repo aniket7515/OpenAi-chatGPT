@@ -32,7 +32,7 @@ const PORT= process.env.PORT || 8080
 
 // api routes
 app.use("/api/v1/auth", authRoutes)
-
+app.use('/api/v1/openai', require("./routes/openaiRoutes"))
 
 // listen server
 app.listen(PORT,()=>{
